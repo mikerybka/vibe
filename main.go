@@ -47,7 +47,7 @@ func main() {
 	}
 
 	reqBody := RequestBody{
-		Model: "gpt-4",
+		Model: "gpt-4.1",
 		Messages: []Message{
 			{Role: "system", Content: "You are a helpful assistant that ONLY returns valid, self-contained Go code. Do not include explanations or markdown formatting."},
 			{Role: "user", Content: userPrompt},
@@ -99,7 +99,7 @@ func main() {
 
 	code := strings.TrimSpace(respBody.Choices[0].Message.Content)
 
-	err = os.WriteFile(outputFile, []byte(code), 0644)
+	err = os.WriteFile(outputFile, []byte(code + "\n"), 0644)
 	if err != nil {
 		fmt.Printf("Failed to write file: %v\n", err)
 		os.Exit(1)
